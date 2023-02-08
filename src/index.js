@@ -1,9 +1,10 @@
 // Create a tagged template lf`...` that formats text using LF line endings.
 var lf = (stringLiterals, ...interpolatedValues) => {
   return stringLiterals.reduce((result, stringLiteral, index) => {
-    let interpolatedValue = (interpolatedValues[index] != null ? interpolatedValues[index] : "");
+    const transformedString = transformLineEnding(stringLiteral, LineEndings.LF);
+    const transformedValue = (interpolatedValues[index] != null ? transformLineEnding(interpolatedValues[index], LineEndings.LF) : "");
 
-    return `${result}${stringLiteral}${interpolatedValue}`;
+    return `${result}${transformedString}${transformedValue}`;
   }, "");
 };
 
