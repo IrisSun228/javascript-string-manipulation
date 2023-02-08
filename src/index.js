@@ -13,10 +13,32 @@ var lf = (stringLiterals, ...interpolatedValues) => {
 };
 
 // Create a tagged template cr`...` that formats text using CR line endings.
-var cr = () => {};
+var cr = (stringLiterals, ...interpolatedValues) => {
+  return stringLiterals.reduce((result, stringLiteral, index) => {
+    const transformedString = transformLineEnding(stringLiteral, LineEndings.CR);
+    let transformedValue = (values[index] != null ? values[index] : "");
+
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(transformedValue, LineEndings.CR);
+    }
+    
+    return `${result}${transformedString}${transformedValue}`;
+  }, "");
+};
 
 // Create a tagged template crlf`...` that formats text using CRLF line endings.
-var crlf = () => {};
+var crlf = (stringLiterals, ...interpolatedValues) => {
+  return stringLiterals.reduce((result, stringLiteral, index) => {
+    const transformedString = transformLineEnding(stringLiteral, LineEndings.CRLF);
+    let transformedValue = (values[index] != null ? values[index] : "");
+
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(transformedValue, LineEndings.CRLF);
+    }
+    
+    return `${result}${transformedString}${transformedValue}`;
+  }, "");
+};
 
 const transformLineEnding = (string, lineEnding) => {
   const {replaceCR, replaceCRLF, replaceLF} = LineEndingReplacements;
