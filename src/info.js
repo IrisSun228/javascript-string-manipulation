@@ -14,7 +14,7 @@ Options:
     CRLF is a combined ending \r\n (common on Windows)
 
 Example:
-    
+
     cat in.txt | crlf-convert LF > out.txt`;
 
 module.exports = {
