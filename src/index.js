@@ -2,8 +2,12 @@
 var lf = (stringLiterals, ...interpolatedValues) => {
   return stringLiterals.reduce((result, stringLiteral, index) => {
     const transformedString = transformLineEnding(stringLiteral, LineEndings.LF);
-    const transformedValue = (interpolatedValues[index] != null ? transformLineEnding(interpolatedValues[index], LineEndings.LF) : "");
+    let transformedValue = (values[index] != null ? values[index] : "");
 
+    if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
+      transformedValue = transformLineEnding(transformedValue, LineEndings.LF);
+    }
+    
     return `${result}${transformedString}${transformedValue}`;
   }, "");
 };
