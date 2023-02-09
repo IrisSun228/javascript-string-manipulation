@@ -2,7 +2,7 @@
 var lf = (stringLiterals, ...interpolatedValues) => {
   return stringLiterals.reduce((result, stringLiteral, index) => {
     const transformedString = transformLineEnding(stringLiteral, LineEndings.LF);
-    let transformedValue = (values[index] != null ? values[index] : "");
+    let transformedValue = (interpolatedValues[index] != null ? interpolatedValues[index] : "");
 
     if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
       transformedValue = transformLineEnding(transformedValue, LineEndings.LF);
@@ -16,7 +16,7 @@ var lf = (stringLiterals, ...interpolatedValues) => {
 var cr = (stringLiterals, ...interpolatedValues) => {
   return stringLiterals.reduce((result, stringLiteral, index) => {
     const transformedString = transformLineEnding(stringLiteral, LineEndings.CR);
-    let transformedValue = (values[index] != null ? values[index] : "");
+    let transformedValue = (interpolatedValues[index] != null ? interpolatedValues[index] : "");
 
     if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
       transformedValue = transformLineEnding(transformedValue, LineEndings.CR);
@@ -30,7 +30,7 @@ var cr = (stringLiterals, ...interpolatedValues) => {
 var crlf = (stringLiterals, ...interpolatedValues) => {
   return stringLiterals.reduce((result, stringLiteral, index) => {
     const transformedString = transformLineEnding(stringLiteral, LineEndings.CRLF);
-    let transformedValue = (values[index] != null ? values[index] : "");
+    let transformedValue = (interpolatedValues[index] != null ? interpolatedValues[index] : "");
 
     if (!Object.getOwnPropertySymbols(transformedValue).includes(disableConverter)) {
       transformedValue = transformLineEnding(transformedValue, LineEndings.CRLF);
